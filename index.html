@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.5">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta charset="UTF-8" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;title&gt;Team Grid Liquid Hover&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>body {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: #111;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-family: sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin: 0;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 40px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>justify-content: center;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.team-grid {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: grid;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>grid-template-columns: repeat(auto-fit,minmax(280px,1fr));</p>
+<p class="p1"><span class="Apple-converted-space">      </span>gap: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>max-width: 1200px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.team-member {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>position: relative;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding-top: 133%; /* 4:3 aspect ratio */</p>
+<p class="p1"><span class="Apple-converted-space">      </span>overflow: hidden;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.team-member img {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>top: 0; left: 0;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>width: 100%; height: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>object-fit: cover;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: block;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.overlay-content {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>top: 0; left: 0;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>z-index: 2;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>width: 100%; height: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>flex-direction: column;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>justify-content: center;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>opacity: 0;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>transition: opacity 0.3s ease;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>pointer-events: none;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: transparent;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.team-member:hover .overlay-content {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>opacity: 1;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>pointer-events: auto;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: transparent;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>svg {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>top: 0; left: 0;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>width: 100%; height: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>z-index: 1;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>pointer-events: none;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;div class="team-grid"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="team-member" id="member-1"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&amp;fit=crop&amp;w=400&amp;q=80" alt="Jane Doe" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="overlay-content"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;h3&gt;Jane Doe&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;p&gt;Creative Director&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;svg viewBox="0 0 300 400" preserveAspectRatio="none"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;defs&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;mask id="blob-mask-1"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;rect width="100%" height="100%" fill="white"/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;path id="blob-1" fill="black" d="M0,0 C100,100 200,100 300,0 L300,400 C200,300 100,300 0,400 Z"/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/mask&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/defs&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;rect width="100%" height="100%" fill="rgba(0,0,0,0.7)" mask="url(#blob-mask-1)"/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/svg&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="team-member" id="member-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&amp;fit=crop&amp;w=400&amp;q=80" alt="John Smith" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="overlay-content"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;h3&gt;John Smith&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;p&gt;Lead Developer&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;svg viewBox="0 0 300 400" preserveAspectRatio="none"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;defs&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;mask id="blob-mask-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;rect width="100%" height="100%" fill="white"/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;path id="blob-2" fill="black" d="M0,0 C100,100 200,100 300,0 L300,400 C200,300 100,300 0,400 Z"/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/mask&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/defs&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;rect width="100%" height="100%" fill="rgba(0,0,0,0.7)" mask="url(#blob-mask-2)"/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/svg&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="team-member" id="member-3"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&amp;fit=crop&amp;w=400&amp;q=80" alt="Alice Johnson" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="overlay-content"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;h3&gt;Alice Johnson&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;p&gt;Marketing Manager&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;svg viewBox="0 0 300 400" preserveAspectRatio="none"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;defs&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;mask id="blob-mask-3"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;rect width="100%" height="100%" fill="white"/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;path id="blob-3" fill="black" d="M0,0 C100,100 200,100 300,0 L300,400 C200,300 100,300 0,400 Z"/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/mask&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/defs&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;rect width="100%" height="100%" fill="rgba(0,0,0,0.7)" mask="url(#blob-mask-3)"/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/svg&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="team-member" id="member-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&amp;fit=crop&amp;w=400&amp;q=80" alt="Bob Williams" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="overlay-content"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;h3&gt;Bob Williams&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;p&gt;Product Owner&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;svg viewBox="0 0 300 400" preserveAspectRatio="none"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;defs&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;mask id="blob-mask-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;rect width="100%" height="100%" fill="white"/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;path id="blob-4" fill="black" d="M0,0 C100,100 200,100 300,0 L300,400 C200,300 100,300 0,400 Z"/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/mask&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/defs&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;rect width="100%" height="100%" fill="rgba(0,0,0,0.7)" mask="url(#blob-mask-4)"/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/svg&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"&gt;&lt;/script&gt;</p>
+<p class="p1">&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>// Set paths for animation</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const blobStart = "M0,0 C100,100 200,100 300,0 L300,400 C200,300 100,300 0,400 Z";</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const blobEnd = "M0,0 C50,150 250,150 300,0 L300,400 C250,250 50,250 0,400 Z";</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>// Animate blobs for all members on hover</p>
+<p class="p1"><span class="Apple-converted-space">  </span>for (let i = 1; i &lt;= 4; i++) {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const member = document.getElementById(`member-${i}`);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const blob = document.getElementById(`blob-${i}`);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>member.addEventListener('mouseenter', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>gsap.to(blob, {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>duration: 0.6,</p>
+<p class="p1"><span class="Apple-converted-space">        </span>attr: { d: blobEnd },</p>
+<p class="p1"><span class="Apple-converted-space">        </span>ease: "power2.out"</p>
+<p class="p1"><span class="Apple-converted-space">      </span>});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>member.addEventListener('mouseleave', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>gsap.to(blob, {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>duration: 0.6,</p>
+<p class="p1"><span class="Apple-converted-space">        </span>attr: { d: blobStart },</p>
+<p class="p1"><span class="Apple-converted-space">        </span>ease: "power2.in"</p>
+<p class="p1"><span class="Apple-converted-space">      </span>});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1">&lt;/script&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
