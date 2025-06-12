@@ -139,33 +139,32 @@
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script>
-  // Set paths for animation
-  const blobStart = "M0,0 C100,100 200,100 300,0 L300,400 C200,300 100,300 0,400 Z";
-  const blobEnd = "M0,0 C50,150 250,150 300,0 L300,400 C250,250 50,250 0,400 Z";
+  const blob = document.getElementById('blob');
 
-  // Animate blobs for all members on hover
-  for (let i = 1; i <= 4; i++) {
-    const member = document.getElementById(`member-${i}`);
-    const blob = document.getElementById(`blob-${i}`);
+  const blobStart = "M0,0 C120,80 180,80 300,0 L300,400 C180,320 120,320 0,400 Z";
+  const blobEnd = "M0,0 C60,200 240,200 300,0 L300,400 C240,200 60,200 0,400 Z";
 
-    member.addEventListener('mouseenter', () => {
-      gsap.to(blob, {
-        duration: 0.6,
-        attr: { d: blobEnd },
-        ease: "power2.out"
-      });
+  const hoverArea = document.getElementById('hover-area');
+
+  hoverArea.addEventListener('mouseenter', () => {
+    gsap.to(blob, {
+      duration: 0.9,
+      attr: { d: blobEnd },
+      ease: "elastic.out(1, 0.5)"
     });
+  });
 
-    member.addEventListener('mouseleave', () => {
-      gsap.to(blob, {
-        duration: 0.6,
-        attr: { d: blobStart },
-        ease: "power2.in"
-      });
+  hoverArea.addEventListener('mouseleave', () => {
+    gsap.to(blob, {
+      duration: 0.9,
+      attr: { d: blobStart },
+      ease: "elastic.in(1, 0.5)"
     });
-  }
+  });
 </script>
+
 
 </body>
 </html>
