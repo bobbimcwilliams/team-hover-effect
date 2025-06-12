@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Full Overlay Blob</title>
+  <title>Fluid Hover Overlay</title>
   <style>
     body {
       background: #111;
@@ -84,8 +84,7 @@
       <mask id="blob-mask">
         <rect width="100%" height="100%" fill="white" />
         <path id="blob" fill="black"
-          d="M0,0 C0,0 0,0 0,0 L0,400 L0,400 L0,400 Z"
-        />
+          d="M150,200 Q150,200 150,200 Q150,200 150,200 Z" />
       </mask>
     </defs>
     <rect width="100%" height="100%" fill="rgba(0,0,0,0.7)" mask="url(#blob-mask)" />
@@ -96,14 +95,14 @@
 <script>
   const blob = document.getElementById('blob');
 
-  const blobStart = "M0,0 C0,0 0,0 0,0 L0,400 L0,400 L0,400 Z";
-  const blobEnd = "M0,0 C150,100 150,100 300,0 L300,400 C150,300 150,300 0,400 Z";
+  const blobStart = "M150,200 Q150,200 150,200 Q150,200 150,200 Z"; // tiny dot
+  const blobEnd = "M0,0 H300 V400 H0 Z"; // full rectangle covering all
 
   const hoverArea = document.getElementById('hover-area');
 
   hoverArea.addEventListener('mouseenter', () => {
     gsap.to(blob, {
-      duration: 1,
+      duration: 0.8,
       attr: { d: blobEnd },
       ease: "power3.out"
     });
