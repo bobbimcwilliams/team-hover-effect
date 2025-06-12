@@ -1,43 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Team Grid Liquid Hover</title>
+  <meta charset="UTF-8">
+  <title>Liquid Overlay with GSAP</title>
   <style>
     body {
       background: #111;
-      font-family: sans-serif;
-      margin: 0;
-      padding: 40px;
       display: flex;
       justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: sans-serif;
     }
-    .team-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-      gap: 20px;
-      max-width: 1200px;
-      width: 100%;
-    }
+
     .team-member {
       position: relative;
-      width: 100%;
-      padding-top: 133%; /* 4:3 aspect ratio */
+      width: 300px;
+      height: 400px;
       overflow: hidden;
       cursor: pointer;
     }
+
     .team-member img {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
       display: block;
     }
+
     .overlay-content {
       position: absolute;
-      top: 0; left: 0;
+      top: 0;
+      left: 0;
       z-index: 2;
-      width: 100%; height: 100%;
+      width: 100%;
+      height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -46,19 +44,18 @@
       opacity: 0;
       transition: opacity 0.3s ease;
       pointer-events: none;
-      text-align: center;
-      padding: 20px;
-      background: transparent;
     }
+
     .team-member:hover .overlay-content {
       opacity: 1;
-      pointer-events: auto;
-      background: transparent;
     }
+
     svg {
       position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       z-index: 1;
       pointer-events: none;
     }
@@ -66,76 +63,24 @@
 </head>
 <body>
 
-<div class="team-grid">
+<div class="team-member" id="hover-area">
+  <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=400&q=80" alt="Team Member">
 
-  <div class="team-member" id="member-1">
-    <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=400&q=80" alt="Jane Doe" />
-    <div class="overlay-content">
-      <h3>Jane Doe</h3>
-      <p>Creative Director</p>
-    </div>
-    <svg viewBox="0 0 300 400" preserveAspectRatio="none">
-      <defs>
-        <mask id="blob-mask-1">
-          <rect width="100%" height="100%" fill="white"/>
-          <path id="blob-1" fill="black" d="M0,0 C100,100 200,100 300,0 L300,400 C200,300 100,300 0,400 Z"/>
-        </mask>
-      </defs>
-      <rect width="100%" height="100%" fill="rgba(0,0,0,0.7)" mask="url(#blob-mask-1)"/>
-    </svg>
+  <div class="overlay-content">
+    <h3>John Doe</h3>
+    <p>Creative Director</p>
   </div>
 
-  <div class="team-member" id="member-2">
-    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=80" alt="John Smith" />
-    <div class="overlay-content">
-      <h3>John Smith</h3>
-      <p>Lead Developer</p>
-    </div>
-    <svg viewBox="0 0 300 400" preserveAspectRatio="none">
-      <defs>
-        <mask id="blob-mask-2">
-          <rect width="100%" height="100%" fill="white"/>
-          <path id="blob-2" fill="black" d="M0,0 C100,100 200,100 300,0 L300,400 C200,300 100,300 0,400 Z"/>
-        </mask>
-      </defs>
-      <rect width="100%" height="100%" fill="rgba(0,0,0,0.7)" mask="url(#blob-mask-2)"/>
-    </svg>
-  </div>
-
-  <div class="team-member" id="member-3">
-    <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=400&q=80" alt="Alice Johnson" />
-    <div class="overlay-content">
-      <h3>Alice Johnson</h3>
-      <p>Marketing Manager</p>
-    </div>
-    <svg viewBox="0 0 300 400" preserveAspectRatio="none">
-      <defs>
-        <mask id="blob-mask-3">
-          <rect width="100%" height="100%" fill="white"/>
-          <path id="blob-3" fill="black" d="M0,0 C100,100 200,100 300,0 L300,400 C200,300 100,300 0,400 Z"/>
-        </mask>
-      </defs>
-      <rect width="100%" height="100%" fill="rgba(0,0,0,0.7)" mask="url(#blob-mask-3)"/>
-    </svg>
-  </div>
-
-  <div class="team-member" id="member-4">
-    <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=400&q=80" alt="Bob Williams" />
-    <div class="overlay-content">
-      <h3>Bob Williams</h3>
-      <p>Product Owner</p>
-    </div>
-    <svg viewBox="0 0 300 400" preserveAspectRatio="none">
-      <defs>
-        <mask id="blob-mask-4">
-          <rect width="100%" height="100%" fill="white"/>
-          <path id="blob-4" fill="black" d="M0,0 C100,100 200,100 300,0 L300,400 C200,300 100,300 0,400 Z"/>
-        </mask>
-      </defs>
-      <rect width="100%" height="100%" fill="rgba(0,0,0,0.7)" mask="url(#blob-mask-4)"/>
-    </svg>
-  </div>
-
+  <svg viewBox="0 0 300 400" preserveAspectRatio="none">
+    <defs>
+      <mask id="blob-mask">
+        <rect width="100%" height="100%" fill="white"/>
+        <path id="blob" fill="black"
+              d="M0,0 C120,80 180,80 300,0 L300,400 C180,320 120,320 0,400 Z"/>
+      </mask>
+    </defs>
+    <rect width="100%" height="100%" fill="rgba(0,0,0,0.7)" mask="url(#blob-mask)"/>
+  </svg>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
