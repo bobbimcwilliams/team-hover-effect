@@ -33,7 +33,7 @@
       position: absolute;
       top: 0;
       left: 0;
-      z-index: 2;
+      z-index: 3;
       width: 100%;
       height: 100%;
       display: flex;
@@ -56,7 +56,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: 1;
+      z-index: 2;
       pointer-events: none;
     }
   </style>
@@ -64,7 +64,7 @@
 <body>
 
 <div class="team-member" id="hover-area">
-  <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=400&q=80" alt="Team Member">
+  <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=400&q=80" alt="Team Member" />
 
   <div class="overlay-content">
     <h3>Jane Doe</h3>
@@ -87,12 +87,42 @@
 <script>
   const blob = document.getElementById('blob');
 
-  const blobStart = "M0,0 C150,0 150,0 300,0 L300,0 C150,0 150,0 0,0 Z";
-  const blobMid = "M0,0 C150,150 150,150 300,0 L300,400 C150,300 150,300 0,400 Z";
-  const blobEnd = "M0,0 C150,200 150,200 300,0 L300,400 C150,200 150,200 0,400 Z";
+  const blobStart = "M0,0 C150,0 150,0 300,0 L300,0 C150,0 150,0 0,0 Z";  // flat, hidden
+  const blobMid = "M0,0 C150,200 150,200 300,0 L300,400 C150,200 150,200 0,400 Z"; // blobby
+  const blobEnd = "M0,0 C150,400 150,400 300,0 L300,400 C150,400 150,400 0,400 Z"; // full cover
 
   const hoverArea = document.getElementById('hover-area');
 
   hoverArea.addEventListener('mouseenter', () => {
     gsap.to(blob, {
-      duration: 0.5,
+      duration: 0.4,
+      attr: { d: blobMid },
+      ease: "power1.out",
+      onComplete: () => {
+        gsap.to(blob, {
+          duration: 0.4,
+          attr: { d: blobEnd },
+          ease: "power2.out"
+        });
+      }
+    });
+  });
+
+  hoverArea.addEventListener('mouseleave', () => {
+    gsap.to(blob, {
+      duration: 0.4,
+      attr: { d: blobMid },
+      ease: "power1.in",
+      onComplete: () => {
+        gsap.to(blob, {
+          duration: 0.4,
+          attr: { d: blobStart },
+          ease: "power2.in"
+        });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
