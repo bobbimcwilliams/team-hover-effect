@@ -33,7 +33,7 @@
       position: absolute;
       top: 0;
       left: 0;
-      z-index: 2;
+      z-index: 3;
       width: 100%;
       height: 100%;
       display: flex;
@@ -56,8 +56,14 @@
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: 1;
+      z-index: 2;
       pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .team-member:hover svg {
+      opacity: 1;
     }
   </style>
 </head>
@@ -67,7 +73,7 @@
   <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=400&q=80" alt="Team Member">
 
   <div class="overlay-content">
-    <h3>John Doe</h3>
+    <h3>Jane Doe</h3>
     <p>Creative Director</p>
   </div>
 
@@ -76,7 +82,7 @@
       <mask id="blob-mask">
         <rect width="100%" height="100%" fill="white"/>
         <path id="blob" fill="black"
-              d="M0,0 C120,80 180,80 300,0 L300,400 C180,320 120,320 0,400 Z"/>
+              d="M0,0 C150,0 150,0 300,0 L300,400 C150,400 150,400 0,400 Z"/>
       </mask>
     </defs>
     <rect width="100%" height="100%" fill="rgba(0,0,0,0.7)" mask="url(#blob-mask)"/>
@@ -87,7 +93,7 @@
 <script>
   const blob = document.getElementById('blob');
 
-  const blobStart = "M0,0 C120,80 180,80 300,0 L300,400 C180,320 120,320 0,400 Z";
+  const blobStart = "M0,0 C150,0 150,0 300,0 L300,400 C150,400 150,400 0,400 Z";
   const blobEnd = "M0,0 C60,200 240,200 300,0 L300,400 C240,200 60,200 0,400 Z";
 
   const hoverArea = document.getElementById('hover-area');
