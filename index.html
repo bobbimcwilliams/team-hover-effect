@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Fluid Blob Hover Overlay</title>
+  <title>Fluid Hover Overlay</title>
   <style>
     body {
       background: #111;
@@ -29,75 +29,70 @@
       display: block;
     }
 
-    .overlay {
+    .overlay-content {
       position: absolute;
       top: 0;
       left: 0;
       z-index: 2;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.7);
-      color: white;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      clip-path: path('M150 0C200 50 250 100 300 200C250 300 200 350 150 400C100 350 50 300 0 200C50 100 100 50 150 0Z');
-      pointer-events: none;
+      color: white;
       opacity: 0;
       transition: opacity 0.3s ease;
+      pointer-events: none;
     }
 
-    .overlay h3,
-    .overlay p {
-      margin: 0;
-      text-align: center;
-    }
-
-    .team-member:hover .overlay {
+    .team-member:hover .overlay-content {
       opacity: 1;
+    }
+
+    svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
     }
   </style>
 </head>
 <body>
 
 <div class="team-member" id="hover-area">
-  <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=400&q=80" alt="Team Member" />
-  <div class="overlay" id="overlay">
+  <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=400&q=80" alt="Team Member">
+
+  <div class="overlay-content">
     <h3>Jane Doe</h3>
     <p>Creative Director</p>
   </div>
+
+  <svg viewBox="0 0 300 400" preserveAspectRatio="none">
+    <defs>
+      <mask id="blob-mask">
+        <rect width="100%" height="100%" fill="white"/>
+        <path id="blob" fill="black"
+              d="M0,0 C150,0 150,0 300,0 L300,0 C150,0 150,0 0,0 Z"/>
+      </mask>
+    </defs>
+    <rect width="100%" height="100%" fill="rgba(0,0,0,0.7)" mask="url(#blob-mask)"/>
+  </svg>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script>
-  const overlay = document.getElementById('overlay');
+  const blob = document.getElementById('blob');
 
-  const smallBlob = "M150 200C150 200 150 200 150 200C150 200 150 200 150 200C150 200 150 200 150 200C150 200 150 200 150 200Z";
-  const fullBlob = "M150 0C200 50 250 100 300 200C250 300 200 350 150 400C100 350 50 300 0 200C50 100 100 50 150 0Z";
+  const blobStart = "M0,0 C150,0 150,0 300,0 L300,0 C150,0 150,0 0,0 Z";
+  const blobMid = "M0,0 C150,150 150,150 300,0 L300,400 C150,300 150,300 0,400 Z";
+  const blobEnd = "M0,0 C150,200 150,200 300,0 L300,400 C150,200 150,200 0,400 Z";
 
-  overlay.style.clipPath = `path('${smallBlob}')`;
+  const hoverArea = document.getElementById('hover-area');
 
-  document.getElementById('hover-area').addEventListener('mouseenter', () => {
-    gsap.to(overlay, {
-      duration: 1,
-      ease: "power2.out",
-      onUpdate: () => {
-        overlay.style.clipPath = `path('${fullBlob}')`;
-      }
-    });
-  });
-
-  document.getElementById('hover-area').addEventListener('mouseleave', () => {
-    gsap.to(overlay, {
-      duration: 1,
-      ease: "power2.in",
-      onUpdate: () => {
-        overlay.style.clipPath = `path('${smallBlob}')`;
-      }
-    });
-  });
-</script>
-
-</body>
-</html>
+  hoverArea.addEventListener('mouseenter', () => {
+    gsap.to(blob, {
+      duration: 0.5,
