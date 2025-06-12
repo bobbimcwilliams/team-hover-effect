@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Fluid Blob Hover</title>
+  <title>Liquid Blob Hover</title>
   <style>
     body {
       background: #111;
@@ -83,10 +83,10 @@
       <mask id="blob-mask">
         <rect width="100%" height="100%" fill="white"/>
         <path id="blob" fill="black"
-              d="M0,0 C150,0 150,0 300,0 L300,400 C150,400 150,400 0,400 Z"/>
+          d="M0,0 C150,0 150,0 300,0 L300,400 C150,400 150,400 0,400 Z" />
       </mask>
     </defs>
-    <rect width="100%" height="100%" fill="rgba(0,0,0,0.7)" mask="url(#blob-mask)"/>
+    <rect width="100%" height="100%" fill="rgba(0,0,0,0.7)" mask="url(#blob-mask)" />
   </svg>
 </div>
 
@@ -94,11 +94,11 @@
 <script>
   const blob = document.getElementById('blob');
 
-  // Initial: flat path (invisible blob)
+  // Flat rectangle (invisible)
   const blobStart = "M0,0 C150,0 150,0 300,0 L300,400 C150,400 150,400 0,400 Z";
 
-  // Fluid blobby shape
-  const blobEnd = "M0,0 C75,100 225,100 300,0 L300,400 C225,300 75,300 0,400 Z";
+  // Lopsided organic blob shape
+  const blobEnd = "M0,0 C80,100 250,40 300,80 L300,400 C220,300 100,350 0,400 Z";
 
   const hoverArea = document.getElementById('hover-area');
 
@@ -106,7 +106,7 @@
     gsap.to(blob, {
       duration: 1,
       attr: { d: blobEnd },
-      ease: "elastic.out(1, 0.5)"
+      ease: "power3.out"
     });
   });
 
@@ -114,7 +114,7 @@
     gsap.to(blob, {
       duration: 0.6,
       attr: { d: blobStart },
-      ease: "power2.inOut"
+      ease: "power3.in"
     });
   });
 </script>
