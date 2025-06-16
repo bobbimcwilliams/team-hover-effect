@@ -37,5 +37,17 @@
     </div>
 
     <script src="script.js"></script>
+    <script>
+  const imgBox = document.querySelector(".img");
+
+  imgBox.addEventListener("mousemove", () => {
+    imgBox.classList.add("hover");
+  });
+
+  imgBox.addEventListener("mouseleave", () => {
+    imgBox.classList.remove("hover");
+  });
+</script>
+
   </body>
 </html>
