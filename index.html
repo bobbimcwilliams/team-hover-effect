@@ -2,129 +2,75 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Liquid Hover Effect</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Liquid Blob Hover Effect</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
     body {
-      background: #111;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      height: 100vh;
+      background: #222;
       display: flex;
       justify-content: center;
       align-items: center;
-    }
-    .team-member {
-      position: relative;
-      width: 300px;
-      height: 400px;
-      cursor: pointer;
-      overflow: hidden;
-      border-radius: 10px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.6);
-    }
-    .team-member img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      user-select: none;
-      pointer-events: none;
-    }
-    .overlay-text {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: white;
-      text-align: center;
-      pointer-events: none;
-      opacity: 0;
-      z-index: 3;
-      font-weight: 600;
-      text-shadow: 0 0 10px rgba(0,0,0,0.7);
-    }
-    .overlay-text h3 {
-      margin: 0 0 8px;
-      font-size: 1.5rem;
-    }
-    .overlay-text p {
+      height: 100vh;
       margin: 0;
-      font-size: 1rem;
-      font-weight: 400;
-      opacity: 0.8;
+      font-family: Arial, sans-serif;
     }
+
+    .blob-container {
+      width: 300px;
+      height: 300px;
+      cursor: pointer;
+      position: relative;
+    }
+
     svg {
-      position: absolute;
-      top: 0;
-      left: 0;
       width: 100%;
       height: 100%;
-      z-index: 2;
-      pointer-events: none;
+      display: block;
+    }
+
+    .blob-path {
+      fill: #00BFFF;
+      transition: fill 0.3s ease;
     }
   </style>
 </head>
 <body>
 
-<div class="team-member" id="team-1">
-  <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=400&q=80" alt="Jane Doe" />
-  <div class="overlay-text">
-    <h3>Jane Doe</h3>
-    <p>Creative Director</p>
-  </div>
-
-  <svg viewBox="0 0 300 400" preserveAspectRatio="none">
-    <defs>
-      <mask id="mask">
-        <rect width="300" height="400" fill="white" />
-        <path id="blob" fill="black" d="M0,0 C100,100 200,100 300,0 L300,400 C200,300 100,300 0,400 Z"/>
-      </mask>
-    </defs>
-    <rect width="300" height="400" fill="rgba(0,0,0,0.7)" mask="url(#mask)"/>
+<div class="blob-container" id="blob-container">
+  <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" >
+    <path id="blob" class="blob-path"
+      d="M421.5,303Q409,356,370,374Q331,392,294,390Q257,388,239,358Q221,328,204,288Q187,248,210,216Q233,184,274,179Q315,174,352,191Q389,208,406,247Q423,286,421.5,303Z" />
   </svg>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
 <script>
   const blob = document.getElementById('blob');
-  const overlayText = document.querySelector('.overlay-text');
-  const teamMember = document.getElementById('team-1');
 
-  const startPath = "M0,0 C100,100 200,100 300,0 L300,400 C200,300 100,300 0,400 Z";
-  const endPath = "M0,0 C50,200 250,200 300,0 L300,400 C250,150 50,150 0,400 Z";
+  // Initial blob shape
+  const blobStart = "M421.5,303Q409,356,370,374Q331,392,294,390Q257,388,239,358Q221,328,204,288Q187,248,210,216Q233,184,274,179Q315,174,352,191Q389,208,406,247Q423,286,421.5,303Z";
 
-  teamMember.addEventListener('mouseenter', () => {
+  // Expanded blob shape
+  const blobHover = "M474,326Q452,402,385,419Q318,436,274,428Q230,420,212,372Q194,324,190,275Q186,226,228,189Q270,152,315,182Q360,212,397,249Q434,286,474,326Z";
+
+  const container = document.getElementById('blob-container');
+
+  container.addEventListener('mouseenter', () => {
     gsap.to(blob, {
-      duration: 0.8,
-      attr: { d: endPath },
-      ease: "power3.out"
-    });
-    gsap.to(overlayText, {
-      duration: 0.6,
-      opacity: 1,
-      ease: "power2.out",
-      delay: 0.3
+      duration: 1.5,
+      attr: { d: blobHover },
+      ease: "elastic.out(1, 0.5)"
     });
   });
 
-  teamMember.addEventListener('mouseleave', () => {
+  container.addEventListener('mouseleave', () => {
     gsap.to(blob, {
-      duration: 0.8,
-      attr: { d: startPath },
-      ease: "power3.in"
-    });
-    gsap.to(overlayText, {
-      duration: 0.4,
-      opacity: 0,
-      ease: "power2.in"
+      duration: 1.5,
+      attr: { d: blobStart },
+      ease: "elastic.out(1, 0.5)"
     });
   });
 </script>
 
 </body>
 </html>
-
