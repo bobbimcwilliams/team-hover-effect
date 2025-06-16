@@ -1,105 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Hover Effect Demo</title>
-  <style>
-    /* Minimal CSS just to make the hover container visible */
-    body {
-      margin: 0;
-      font-family: sans-serif;
-      background: #111;
-      color: white;
-    }
-
-    .container {
-      position: relative;
-      width: 100vw;
-      height: 100vh;
-      overflow: hidden;
-    }
-
-    .img1 {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
-
-    .info {
-      position: relative;
-      z-index: 2;
-      padding: 20px;
-    }
-
-    /* Style for the WebCifar widget */
-    #webCifar-sidebox {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 9999;
-    }
-
-    #webCifar {
-      background: #333;
-      padding: 10px;
-      border-radius: 8px;
-    }
-
-    #webCifar .logo {
-      margin: 0;
-      color: #00f0ff;
-    }
-
-    .close {
-      cursor: pointer;
-    }
-  </style>
-</head>
-<body>
-
-  <section>
-    <div class="container">
-      <div class="info">
-        <h3>Lorem ipsum</h3>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Hover Effect</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <section>
+      <div class="container">
+        <div class="info">
+          <h3>Hey there,</h3>
+          <h4>I'm floating!</h4>
+        </div>
+        <div class="img">
+          <img src="https://images.unsplash.com/photo-1495563381401-ecfbcaaa67bc?auto=format&fit=crop&w=800&q=80" alt="Image" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
       </div>
-      <div class="img1 img"></div>
-    </div>
-  </section>
+    </section>
 
-  <!-- WebCifar Floating Card -->
-  <div id="webCifar-sidebox">
-    <div id="webCifar">
-      <h2 class="logo">Web Cifar</h2>
-      <p class="author">Coded By <span>Shaif Arfan</span></p>
-      <div class="items">
-        <a href="https://www.youtube.com/channel/UCdxaLo9ALJgXgOUDURRPGiQ" target="_blank" class="item youtubeLink">
-          <p>Watch how we made this</p>
-        </a>
-        <a href="https://webcifar.com" target="_blank" class="item">
-          <p>https://webcifar.com</p>
-        </a>
+    <div id="webCifar-sidebox">
+      <div id="webCifar-icon">
+        <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2Zm0 18a8 8 0 1 1 8-8a8.009 8.009 0 0 1-8 8Z"/></svg>
+        Open Box
       </div>
-      <div class="close">
-        ✖
+      <div id="webCifar">
+        <span class="close">&times;</span>
+        <div class="logo">Hover Card</div>
+        <div class="author">By <span>Web Cifar</span></div>
+        <div class="items">
+          <div class="item">Floating Effect 1</div>
+          <div class="item">Floating Effect 2</div>
+        </div>
       </div>
     </div>
-    <div id="webCifar-icon">
-      ℹ Info About the pen
-    </div>
-  </div>
 
-  <!-- External Libraries -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"></script>
-
-  <!-- Hover Effect JS (place the long JS function you have here) -->
-  <script>
-    // Paste the entire hover effect script function you were given here
-    // (You can keep the big script block from your original message)
-  </script>
-
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>
