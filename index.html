@@ -2,23 +2,104 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Hover Effect</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hover Effect Demo</title>
+  <style>
+    /* Minimal CSS just to make the hover container visible */
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: #111;
+      color: white;
+    }
+
+    .container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .img1 {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .info {
+      position: relative;
+      z-index: 2;
+      padding: 20px;
+    }
+
+    /* Style for the WebCifar widget */
+    #webCifar-sidebox {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 9999;
+    }
+
+    #webCifar {
+      background: #333;
+      padding: 10px;
+      border-radius: 8px;
+    }
+
+    #webCifar .logo {
+      margin: 0;
+      color: #00f0ff;
+    }
+
+    .close {
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-  <!-- Paste the HTML from CodePen's HTML panel here -->
-  <!-- For example, this is from that CodePen: -->
-  <div class="container">
-    <div class="imgBx">
-      <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9" alt="" />
+
+  <section>
+    <div class="container">
+      <div class="info">
+        <h3>Lorem ipsum</h3>
+      </div>
+      <div class="img1 img"></div>
     </div>
-    <div class="contentBx">
-      <h2>Image Hover Effect</h2>
-      <p>Some description text here.</p>
+  </section>
+
+  <!-- WebCifar Floating Card -->
+  <div id="webCifar-sidebox">
+    <div id="webCifar">
+      <h2 class="logo">Web Cifar</h2>
+      <p class="author">Coded By <span>Shaif Arfan</span></p>
+      <div class="items">
+        <a href="https://www.youtube.com/channel/UCdxaLo9ALJgXgOUDURRPGiQ" target="_blank" class="item youtubeLink">
+          <p>Watch how we made this</p>
+        </a>
+        <a href="https://webcifar.com" target="_blank" class="item">
+          <p>https://webcifar.com</p>
+        </a>
+      </div>
+      <div class="close">
+        ✖
+      </div>
+    </div>
+    <div id="webCifar-icon">
+      ℹ Info About the pen
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <!-- External Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"></script>
+
+  <!-- Hover Effect JS (place the long JS function you have here) -->
+  <script>
+    // Paste the entire hover effect script function you were given here
+    // (You can keep the big script block from your original message)
+  </script>
+
 </body>
 </html>
