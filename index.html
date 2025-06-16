@@ -93,232 +93,258 @@
   </style>
 </head>
 <body>
-
-  <section>
-    <div class="container">
-      <div class="info">
-        <h3>Lorem ipsum</h3>
-      </div>
-      <div class="img1 img"></div>
+<section>
+  <div class="container">
+    <div class="info">
+      <h3>Lorem ipsum</h3>
     </div>
-  </section>
+    <div class="img1 img"></div>
+  </div>
+</section>
 
-  <script>
-    // Your hover effect js
-    !(function(e, t) {
-      "object" == typeof exports && "undefined" != typeof module ?
-        (module.exports = t(require("three"), require("gsap"))) :
-        "function" == typeof define && define.amd ?
-        define(["three", "gsap"], t) :
-        (e.hoverEffect = t(e.THREE, e.gsap));
-    })(this, function(e, t) {
-      return (
-        (t = t && t.hasOwnProperty("default") ? t.default : t),
-        function(n) {
-          function i() {
-            for (var e = arguments, t = 0; t < arguments.length; t++)
-              if (void 0 !== e[t]) return e[t];
-          }
-          console.log(
-            "%c Hover effect by Robin Delaporte: https://github.com/robin-dela/hover-effect ",
-            "color: #bada55; font-size: 0.8rem"
-          );
-          var r = n.parent,
-            o = n.displacementImage,
-            a = n.image1,
-            s = n.image2,
-            f = i(n.imagesRatio, 1),
-            d = i(n.intensity1, n.intensity, 1),
-            l = i(n.intensity2, n.intensity, 1),
-            u = i(n.angle, Math.PI / 4),
-            v = i(n.angle1, u),
-            m = i(n.angle2, 3 * -u),
-            c = i(n.speedIn, n.speed, 1.6),
-            p = i(n.speedOut, n.speed, 1.2),
-            g = i(n.hover, !0),
-            h = i(n.easing, t.Expo.easeOut),
-            y = i(n.video, !1);
-          if (r)
-            if (a && s && o) {
-              var x = new e.Scene(),
-                F = new e.OrthographicCamera(
-                  r.offsetWidth / -2,
-                  r.offsetWidth / 2,
-                  r.offsetHeight / 2,
-                  r.offsetHeight / -2,
-                  1,
-                  1e3
-                );
-              F.position.z = 1;
-              var w = new e.WebGLRenderer({
-                antialias: !1,
-                alpha: !0
-              });
-              w.setPixelRatio(2),
-                w.setClearColor(16777215, 0),
-                w.setSize(r.offsetWidth, r.offsetHeight),
-                r.appendChild(w.domElement);
-              var L = function() {
-                  w.render(x, F);
-                },
-                H = new e.TextureLoader();
-              H.crossOrigin = "";
-              var E,
-                W,
-                V = H.load(o, L);
-              if (((V.magFilter = V.minFilter = e.LinearFilter), y)) {
-                var M = function() {
-                  requestAnimationFrame(M), w.render(x, F);
-                };
-                M(),
-                  ((y = document.createElement("video")).autoplay = !0),
-                  (y.loop = !0),
-                  (y.src = a),
-                  y.load();
-                var P = document.createElement("video");
-                (P.autoplay = !0), (P.loop = !0), (P.src = s), P.load();
-                var R = new e.VideoTexture(y),
-                  T = new e.VideoTexture(P);
-                (R.magFilter = T.magFilter = e.LinearFilter),
-                (R.minFilter = T.minFilter = e.LinearFilter),
-                P.addEventListener(
-                    "loadeddata",
-                    function() {
-                      P.play(),
-                        ((T = new e.VideoTexture(P)).magFilter = e.LinearFilter),
-                        (T.minFilter = e.LinearFilter),
-                        (C.uniforms.texture2.value = T);
-                    },
-                    !1
-                  ),
-                  y.addEventListener(
-                    "loadeddata",
-                    function() {
-                      y.play(),
-                        ((R = new e.VideoTexture(y)).magFilter = e.LinearFilter),
-                        (R.minFilter = e.LinearFilter),
-                        (C.uniforms.texture1.value = R);
-                    },
-                    !1
-                  );
-              } else
-                (R = H.load(a, L)),
-                (T = H.load(s, L)),
-                (R.magFilter = T.magFilter = e.LinearFilter),
-                (R.minFilter = T.minFilter = e.LinearFilter);
-              var U = f;
-              r.offsetHeight / r.offsetWidth < U ?
-                ((E = 1), (W = r.offsetHeight / r.offsetWidth / U)) :
-                ((E = (r.offsetWidth / r.offsetHeight) * U), (W = 1));
-              var C = new e.ShaderMaterial({
-                  uniforms: {
-                    intensity1: {
-                      type: "f",
-                      value: d
-                    },
-                    intensity2: {
-                      type: "f",
-                      value: l
-                    },
-                    dispFactor: {
-                      type: "f",
-                      value: 0
-                    },
-                    angle1: {
-                      type: "f",
-                      value: v
-                    },
-                    angle2: {
-                      type: "f",
-                      value: m
-                    },
-                    texture1: {
-                      type: "t",
-                      value: R
-                    },
-                    texture2: {
-                      type: "t",
-                      value: T
-                    },
-                    disp: {
-                      type: "t",
-                      value: V
-                    },
-                    res: {
-                      type: "vec4",
-                      value: new e.Vector4(r.offsetWidth, r.offsetHeight, E, W)
-                    },
-                    dpr: {
-                      type: "f",
-                      value: window.devicePixelRatio
-                    }
-                  },
-                  vertexShader: "\nvarying vec2 vUv;\nvoid main() {\n  vUv = uv;\n  gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );\n}\n",
-                  fragmentShader: "\nvarying vec2 vUv;\n\nuniform float dispFactor;\nuniform float dpr;\nuniform sampler2D disp;\n\nuniform sampler2D texture1;\nuniform sampler2D texture2;\nuniform float angle1;\nuniform float angle2;\nuniform float intensity1;\nuniform float intensity2;\nuniform vec4 res;\nuniform vec2 parent;\n\nmat2 getRotM(float angle) {\n  float s = sin(angle);\n  float c = cos(angle);\n  return mat2(c, -s, s, c);\n}\n\nvoid main() {\n  vec4 disp = texture2D(disp, vUv);\n  vec2 dispVec = vec2(disp.r, disp.g);\n\n  vec2 uv = 0.5 * gl_FragCoord.xy / (res.xy) ;\n  vec2 myUV = (uv - vec2(0.5))*res.zw + vec2(0.5);\n\n\n  vec2 distortedPosition1 = myUV + getRotM(angle1) * dispVec * intensity1 * dispFactor;\n  vec2 distortedPosition2 = myUV + getRotM(angle2) * dispVec * intensity2 * (1.0 - dispFactor);\n  vec4 _texture1 = texture2D(texture1, distortedPosition1);\n  vec4 _texture2 = texture2D(texture2, distortedPosition2);\n  gl_FragColor = mix(_texture1, _texture2, dispFactor);\n}\n",
-                  transparent: !0,
-                  opacity: 1
-                }),
-                b = new e.PlaneBufferGeometry(r.offsetWidth, r.offsetHeight, 1),
-                D = new e.Mesh(b, C);
-              x.add(D),
-                g &&
-                (r.addEventListener("mouseenter", _),
-                  r.addEventListener("touchstart", _),
-                  r.addEventListener("mouseleave", z),
-                  r.addEventListener("touchend", z)),
-                window.addEventListener("resize", function(t) {
-                  r.offsetHeight / r.offsetWidth < U ?
-                    ((E = 1), (W = r.offsetHeight / r.offsetWidth / U)) :
-                    ((E = (r.offsetWidth / r.offsetHeight) * U), (W = 1)),
-                    (D.material.uniforms.res.value = new e.Vector4(
-                      r.offsetWidth,
-                      r.offsetHeight,
-                      E,
-                      W
-                    )),
-                    w.setSize(r.offsetWidth, r.offsetHeight),
-                    L();
-                }),
-                (this.next = _),
-                (this.previous = z);
-            } else console.warn("One or more images are missing");
-          else console.warn("Parent missing");
-
-          function _() {
-            t.to(C.uniforms.dispFactor, c, {
-              value: 1,
-              ease: h,
-              onUpdate: L,
-              onComplete: L
-            });
-          }
-
-          function z() {
-            t.to(C.uniforms.dispFactor, p, {
-              value: 0,
-              ease: h,
-              onUpdate: L,
-              onComplete: L
-            });
-          }
+<script>
+  // hover effect js 
+  !(function(e, t) {
+    "object" == typeof exports && "undefined" != typeof module ?
+      (module.exports = t(require("three"), require("gsap/TweenMax"))) :
+      "function" == typeof define && define.amd ?
+      define(["three", "gsap/TweenMax"], t) :
+      (e.hoverEffect = t(e.THREE, e.TweenMax));
+  })(this, function(e, t) {
+    return (
+      (t = t && t.hasOwnProperty("default") ? t.default : t),
+      function(n) {
+        function i() {
+          for (var e = arguments, t = 0; t < arguments.length; t++)
+            if (void 0 !== e[t]) return e[t];
         }
-      );
-    });
+        console.log(
+          "%c Hover effect by Robin Delaporte: https://github.com/robin-dela/hover-effect ",
+          "color: #bada55; font-size: 0.8rem"
+        );
+        var r = n.parent,
+          o = n.displacementImage,
+          a = n.image1,
+          s = n.image2,
+          f = i(n.imagesRatio, 1),
+          d = i(n.intensity1, n.intensity, 1),
+          l = i(n.intensity2, n.intensity, 1),
+          u = i(n.angle, Math.PI / 4),
+          v = i(n.angle1, u),
+          m = i(n.angle2, 3 * -u),
+          c = i(n.speedIn, n.speed, 1.6),
+          p = i(n.speedOut, n.speed, 1.2),
+          g = i(n.hover, !0),
+          h = i(n.easing, Expo.easeOut),
+          y = i(n.video, !1);
+        if (r)
+          if (a && s && o) {
+            var x = new e.Scene(),
+              F = new e.OrthographicCamera(
+                r.offsetWidth / -2,
+                r.offsetWidth / 2,
+                r.offsetHeight / 2,
+                r.offsetHeight / -2,
+                1,
+                1e3
+              );
+            F.position.z = 1;
+            var w = new e.WebGLRenderer({
+              antialias: !1,
+              alpha: !0
+            });
+            w.setPixelRatio(2),
+              w.setClearColor(16777215, 0),
+              w.setSize(r.offsetWidth, r.offsetHeight),
+              r.appendChild(w.domElement);
+            var L = function() {
+                w.render(x, F);
+              },
+              H = new e.TextureLoader();
+            H.crossOrigin = "";
+            var E,
+              W,
+              V = H.load(o, L);
+            if (((V.magFilter = V.minFilter = e.LinearFilter), y)) {
+              var M = function() {
+                requestAnimationFrame(M), w.render(x, F);
+              };
+              M(),
+                ((y = document.createElement("video")).autoplay = !0),
+                (y.loop = !0),
+                (y.src = a),
+                y.load();
+              var P = document.createElement("video");
+              (P.autoplay = !0), (P.loop = !0), (P.src = s), P.load();
+              var R = new e.VideoTexture(y),
+                T = new e.VideoTexture(P);
+              (R.magFilter = T.magFilter = e.LinearFilter),
+              (R.minFilter = T.minFilter = e.LinearFilter),
+              P.addEventListener(
+                  "loadeddata",
+                  function() {
+                    P.play(),
+                      ((T = new e.VideoTexture(P)).magFilter = e.LinearFilter),
+                      (T.minFilter = e.LinearFilter),
+                      (C.uniforms.texture2.value = T);
+                  },
+                  !1
+                ),
+                y.addEventListener(
+                  "loadeddata",
+                  function() {
+                    y.play(),
+                      ((R = new e.VideoTexture(y)).magFilter = e.LinearFilter),
+                      (R.minFilter = e.LinearFilter),
+                      (C.uniforms.texture1.value = R);
+                  },
+                  !1
+                );
+            } else
+              (R = H.load(a, L)),
+              (T = H.load(s, L)),
+              (R.magFilter = T.magFilter = e.LinearFilter),
+              (R.minFilter = T.minFilter = e.LinearFilter);
+            var U = f;
+            r.offsetHeight / r.offsetWidth < U ?
+              ((E = 1), (W = r.offsetHeight / r.offsetWidth / U)) :
+              ((E = (r.offsetWidth / r.offsetHeight) * U), (W = 1));
+            var C = new e.ShaderMaterial({
+                uniforms: {
+                  intensity1: {
+                    type: "f",
+                    value: d
+                  },
+                  intensity2: {
+                    type: "f",
+                    value: l
+                  },
+                  dispFactor: {
+                    type: "f",
+                    value: 0
+                  },
+                  angle1: {
+                    type: "f",
+                    value: v
+                  },
+                  angle2: {
+                    type: "f",
+                    value: m
+                  },
+                  texture1: {
+                    type: "t",
+                    value: R
+                  },
+                  texture2: {
+                    type: "t",
+                    value: T
+                  },
+                  disp: {
+                    type: "t",
+                    value: V
+                  },
+                  res: {
+                    type: "vec4",
+                    value: new e.Vector4(r.offsetWidth, r.offsetHeight, E, W)
+                  },
+                  dpr: {
+                    type: "f",
+                    value: window.devicePixelRatio
+                  }
+                },
+                vertexShader: "\nvarying vec2 vUv;\nvoid main() {\n  vUv = uv;\n  gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );\n}\n",
+                fragmentShader: "\nvarying vec2 vUv;\n\nuniform float dispFactor;\nuniform float dpr;\nuniform sampler2D disp;\n\nuniform sampler2D texture1;\nuniform sampler2D texture2;\nuniform float angle1;\nuniform float angle2;\nuniform float intensity1;\nuniform float intensity2;\nuniform vec4 res;\nuniform vec2 parent;\n\nmat2 getRotM(float angle) {\n  float s = sin(angle);\n  float c = cos(angle);\n  return mat2(c, -s, s, c);\n}\n\nvoid main() {\n  vec4 disp = texture2D(disp, vUv);\n  vec2 dispVec = vec2(disp.r, disp.g);\n\n  vec2 uv = 0.5 * gl_FragCoord.xy / (res.xy) ;\n  vec2 myUV = (uv - vec2(0.5))*res.zw + vec2(0.5);\n\n\n  vec2 distortedPosition1 = myUV + getRotM(angle1) * dispVec * intensity1 * dispFactor;\n  vec2 distortedPosition2 = myUV + getRotM(angle2) * dispVec * intensity2 * (1.0 - dispFactor);\n  vec4 _texture1 = texture2D(texture1, distortedPosition1);\n  vec4 _texture2 = texture2D(texture2, distortedPosition2);\n  gl_FragColor = mix(_texture1, _texture2, dispFactor);\n}\n",
+                transparent: !0,
+                opacity: 1
+              }),
+              b = new e.PlaneBufferGeometry(r.offsetWidth, r.offsetHeight, 1),
+              D = new e.Mesh(b, C);
+            x.add(D),
+              g &&
+              (r.addEventListener("mouseenter", _),
+                r.addEventListener("touchstart", _),
+                r.addEventListener("mouseleave", z),
+                r.addEventListener("touchend", z)),
+              window.addEventListener("resize", function(t) {
+                r.offsetHeight / r.offsetWidth < U ?
+                  ((E = 1), (W = r.offsetHeight / r.offsetWidth / U)) :
+                  ((E = (r.offsetWidth / r.offsetHeight) * U), (W = 1)),
+                  (D.material.uniforms.res.value = new e.Vector4(
+                    r.offsetWidth,
+                    r.offsetHeight,
+                    E,
+                    W
+                  )),
+                  w.setSize(r.offsetWidth, r.offsetHeight),
+                  L();
+              }),
+              (this.next = _),
+              (this.previous = z);
+          } else console.warn("One or more images are missing");
+        else console.warn("Parent missing");
 
-    // Now initialize hoverEffect on your container with two images and a displacement map
-    document.addEventListener("DOMContentLoaded", () => {
-      const container = document.querySelector(".container");
+        function _() {
+          t.to(C.uniforms.dispFactor, c, {
+            value: 1,
+            ease: h,
+            onUpdate: L,
+            onComplete: L
+          });
+        }
 
-      // Initialize hoverEffect with these images (replace URLs with your own if you want)
-      new hoverEffect({
-        parent: container,
-        intensity: 0.3,
-        image1: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
-        image2: "https://images.unsplash.com/photo-1519985176271-adb1088fa94c?auto=format&fit=crop&w=800&q=80",
-        displacementImage: "https://raw.githubusercontent.com/robin-dela/hover-effect/master/dist/displacement/4.png"
-      });
-    });
-  </script>
+        function z() {
+          t.to(C.uniforms.dispFactor, p, {
+            value: 0,
+            ease: h,
+            onUpdate: L,
+            onComplete: L
+          });
+        }
+      }
+    );
+  });
+</script>
+
+<!-- *******************   -->
+<!--  !!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+<!--  This Code is for only the floating card in right bottom corner -->
+<!-- ********************  -->
+
+<div id="webCifar-sidebox">
+  <div id="webCifar">
+    <h2 class="logo">Web Cifar</h2>
+    <p class="author">Coded By <span>Shaif Arfan</span> </p>
+    <div class="items">
+      <a href="https://www.youtube.com/channel/UCdxaLo9ALJgXgOUDURRPGiQ" target="_blank" class="item youtubeLink">
+        <svg title="watch how we made this" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+          <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
+        </svg>
+        <p>Watch how we made this.
+        </p>
+      </a>
+      <a href="https://webcifar.com" target="_blank" class="item">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+        </svg>
+        <p>https://webcifar.com</p>
+      </a>
+
+    </div>
+    <div class="close">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+      </svg>
+    </div>
+  </div>
+  <div id="webCifar-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+    <p>Info About the pen</p>
+  </div>
+</div>
+ 
 
 </body>
 </html>
