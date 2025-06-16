@@ -51,6 +51,18 @@
     imgBox.classList.remove("hover");
   });
 </script>
+<script>
+  new hoverEffect({
+    parent: document.querySelector('.img1'),
+    intensity: 0.3,
+    angle1    : Math.PI / 4,
+    angle2    : -Math.PI / 4,
+    imagesRatio: 1.0,
+    image1: 'https://IMAGE_URL_1.jpg',
+    image2: 'https://IMAGE_URL_2.jpg',
+    displacementImage: 'https://some-displacement-map.png'
+  });
+</script>
 
   </body>
 </html>
